@@ -1,12 +1,12 @@
 import * as React from 'react';
 import './Card.css';
 
-interface CardState {
+interface CardProps {
   swipe: number;
+  onSwipe: (swipe: number) => void;
 }
 
-export class Card extends React.Component<{}, CardState> {
-  state = { swipe: 0 };
+export class Card extends React.Component<CardProps, {}> {
   swipingStart?: number = undefined;
   root: HTMLDivElement | null = null;
   componentDidMount() {
@@ -29,14 +29,14 @@ export class Card extends React.Component<{}, CardState> {
   handleMouseUp = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    this.setState({ swipe: 0 });
     this.swipingStart = undefined;
+    this.props.onSwipe(0);
   }
   handleMouseMove = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (this.swipingStart !== undefined) {
-      this.setState({ swipe: e.clientX - this.swipingStart });
+    if (this.swipingStart !== undefined && this.root) {
+      this.props.onSwipe((e.clientX - this.swipingStart) / this.root.getBoundingClientRect().width);
     }
   }
   handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -48,19 +48,18 @@ export class Card extends React.Component<{}, CardState> {
     e.preventDefault();
     e.stopPropagation();
     this.swipingStart = undefined;
-    this.setState({ swipe: 0 });
+    this.props.onSwipe(0);
   }
   handleTouchMove = (e: TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (this.swipingStart !== undefined) {
-      this.setState({ swipe: e.touches[0].clientX - this.swipingStart });
+    if (this.swipingStart !== undefined && this.root) {
+      this.props.onSwipe((e.touches[0].clientX - this.swipingStart) / this.root.getBoundingClientRect().width);
     }
   }
   render() {
-    const swipe = this.root ? this.state.swipe / this.root.getBoundingClientRect().width : 0;
     const style = {
-      transform: `rotateZ(${swipe * 40}deg)`,
+      transform: `rotateZ(${this.props.swipe * 40}deg)`,
       transformOrigin: '50% 300%'
     };
     return (
@@ -70,7 +69,7 @@ export class Card extends React.Component<{}, CardState> {
         onMouseDown={this.handleMouseDown}
         onTouchStart={this.handleTouchStart}
         style={style}
-        >
+      >
         <div className="CardOverlay"/>
         <div className="CardTitle">Wolfen</div>
       </div>
