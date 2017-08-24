@@ -9,3 +9,8 @@ ReactDOM.render(
   document.getElementById('root') as HTMLElement
 );
 // registerServiceWorker();
+
+// Disable scrolling.
+document.ontouchmove = function (e: TouchEvent) {
+  e.preventDefault();
+};

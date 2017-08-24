@@ -1,0 +1,17 @@
+
+.Card {
+  width: 70vw;
+  height: 100vw;
+  max-width: 60vh;
+  max-height: 80vh;
+  background: url('./Images/Characters/Wolfen1.2.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 3px 4px 13px rgba(0, 0, 0, 0.6);
+}
+
+.CardTitle {
+  color: #fff;
+  margin: 10px;
+}
