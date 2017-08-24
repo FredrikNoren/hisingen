@@ -1,5 +1,21 @@
 
-.App .Card {
+.App {
+  background: url('./Images/Environments/Takreshspawn.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+.AppBackgroundOverlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: linear-gradient(to bottom, rgba(101, 88, 54, 0.68) 0%,rgba(49, 45, 19, 0.87) 100%);
+}
+
+.App .CardContainer {
   position: absolute;
   left: 50%;
   top: 50%;

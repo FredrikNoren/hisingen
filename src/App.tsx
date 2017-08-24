@@ -6,7 +6,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Card />
+        <div className="AppBackgroundOverlay" />
+        <div className="CardContainer">
+          <Card />
+        </div>
       </div>
     );
   }
