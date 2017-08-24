@@ -1,9 +1,9 @@
 
 .Card {
-  width: 71vw; /* 100 * 2.5/3.5 */
-  height: 100vw;
-  max-width: 57vh; /* 80 * 2.5/3.5 */
-  max-height: 80vh;
+  width: 64vw; /* 100 * 2.5/3.5 */
+  height: 90vw;
+  max-width: 48vh; /* 80 * 2.5/3.5 */
+  max-height: 65vh;
   background: url('./Images/Characters/Wolfen1.2.jpg');
   background-size: cover;
   background-position: center;
@@ -13,7 +13,7 @@
 }
 
 .Card,
-.CardOverlay {
+.Card > .Overlay {
   border-radius: 10px;
 }
 
@@ -37,9 +37,4 @@
   height: 120vmin;
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.43) 0%,rgba(125, 185, 232, 0.00) 60%);
   display: none;
-}
-
-.CardTitle {
-  color: #fff;
-  margin: 10px;
 }

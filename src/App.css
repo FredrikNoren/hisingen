@@ -1,6 +1,6 @@
 
 .App {
-  background: url('./Images/Environments/Takreshspawn.jpg');
+  background: #232620;
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -10,9 +10,31 @@
   background: linear-gradient(to bottom, rgba(101, 88, 54, 0.68) 0%,rgba(49, 45, 19, 0.87) 100%);
 }
 
-.App .CardContainer {
+.App .Content {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 64vw; /* 100 * 2.5/3.5 */
+  max-width: 48vh; /* 80 * 2.5/3.5 */
+}
+
+.CardTitle {
+  padding: 2vmin;
+  padding-bottom: 4vmin;
+  color: #dfe2d2;
+}
+
+.Actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4vmin;
+}
+
+.CardLeft {
+  color: #ff7157;
+}
+.CardRight {
+  color: #6fd678;
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 import './Card.css';
 
 interface CardProps {
+  imageSrc: string;
   swipe: number;
   onSwipe: (swipe: number) => void;
 }
@@ -70,6 +71,7 @@ export class Card extends React.Component<CardProps, CardState> {
     const style = {
       transform: `rotateZ(${this.props.swipe * 40}deg)`,
       transformOrigin: '50% 300%',
+      backgroundImage: `url(${this.props.imageSrc})`
     };
     const shineStyle = {
       left: (-20 + this.state.shine.x) + 'vmin',
@@ -90,7 +92,6 @@ export class Card extends React.Component<CardProps, CardState> {
         <div className="CardShineContainer Overlay">
           <div className="CardShine" style={shineStyle} />
         </div>
-        <div className="CardTitle">Wolfen</div>
       </div>
     );
   }
