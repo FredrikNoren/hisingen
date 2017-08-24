@@ -5,6 +5,7 @@ interface CardProps {
   imageSrc: string;
   swipe: number;
   onSwipe: (swipe: number) => void;
+  onSwipeRelease: () => void;
 }
 interface CardState {
   shine: { x: number, y: number };
@@ -39,8 +40,10 @@ export class Card extends React.Component<CardProps, CardState> {
   handleMouseUp = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    this.swipingStart = undefined;
-    this.props.onSwipe(0);
+    if (this.swipingStart !== undefined) {
+      this.swipingStart = undefined;
+      this.props.onSwipeRelease();
+    }
   }
   handleMouseMove = (e: MouseEvent) => {
     e.preventDefault();
@@ -57,8 +60,10 @@ export class Card extends React.Component<CardProps, CardState> {
   handleTouchEnd = (e: TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    this.swipingStart = undefined;
-    this.props.onSwipe(0);
+    if (this.swipingStart !== undefined) {
+      this.swipingStart = undefined;
+      this.props.onSwipeRelease();
+    }
   }
   handleTouchMove = (e: TouchEvent) => {
     e.preventDefault();

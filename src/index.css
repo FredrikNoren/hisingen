@@ -1,13 +1,47 @@
-@import url('https://fonts.googleapis.com/css?family=Alice');
+@import url('https://fonts.googleapis.com/css?family=Alegreya:900|Alice');
 
 html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Alice', serif;
+}
+
+body {
   color: #fff;
+}
+
+body, button {
+  font-family: 'Alice', serif;
   font-size: 4vh;
+}
+
+button {
+  color: #4e4a3b;
+  font-weight: bold;
+  font-family: 'Alegreya', serif;
+  border: 0;
+  border-radius: 3px;
+  background: url('./Images/Icons/button1glow.png');
+  background-size: cover;
+  background-position: center;
+  width: 30vh;
+  height: 6vh;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  transition: left 50ms linear, top 50ms linear, box-shadow 50ms linear;
+}
+button:active {
+  position: relative;
+  left: 3px;
+  top: 3px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+button:focus {
+  outline: 0;
 }
 
 * {

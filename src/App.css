@@ -5,6 +5,7 @@
   background-position: center;
   width: 100%;
   height: 100%;
+  transition: 100ms linear all;
 }
 .AppBackgroundOverlay {
   background: linear-gradient(to bottom, rgba(101, 88, 54, 0.68) 0%,rgba(49, 45, 19, 0.87) 100%);
@@ -19,6 +20,32 @@
   max-width: 48vh; /* 80 * 2.5/3.5 */
 }
 
+.CardTitle,
+.Card,
+.Actions,
+.Next {
+  transition: 200ms linear opacity;
+}
+
+.CardState .CardTitle,
+.CardState .Card,
+.CardState .Actions {
+  opacity: 1;
+}
+.CardState .Next {
+  opacity: 0;
+  pointer-events: none;
+}
+.NextState .CardTitle,
+.NextState .Card,
+.NextState .Actions {
+  opacity: 0;
+}
+.NextState .Next {
+  opacity: 1;
+  pointer-events: inherit;
+}
+
 .CardTitle {
   padding: 2vmin;
   padding-bottom: 4vmin;
@@ -30,6 +57,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 4vmin;
+  align-items: baseline;
 }
 
 .CardLeft {
@@ -37,4 +65,14 @@
 }
 .CardRight {
   color: #6fd678;
+}
+
+.Next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+.Next > button {
+  margin-top: 5vh;
 }
