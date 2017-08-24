@@ -7,11 +7,6 @@
   height: 100%;
 }
 .AppBackgroundOverlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
   background: linear-gradient(to bottom, rgba(101, 88, 54, 0.68) 0%,rgba(49, 45, 19, 0.87) 100%);
 }
 

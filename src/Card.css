@@ -18,12 +18,25 @@
 }
 
 .CardOverlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
   background: linear-gradient(to bottom, rgba(199, 234, 202, 0.38) 0%,rgba(22, 49, 19, 0.52) 100%);
+}
+
+.CardAcceptOverlay {
+  background: rgba(79, 255, 79, 0.53);
+}
+.CardRejectOverlay {
+  background: rgba(225, 59, 17, 0.73);
+}
+
+.CardShineContainer {
+  overflow: hidden;
+}
+.CardShine {
+  position: relative;
+  width: 120vmin;
+  height: 120vmin;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.43) 0%,rgba(125, 185, 232, 0.00) 60%);
+  display: none;
 }
 
 .CardTitle {

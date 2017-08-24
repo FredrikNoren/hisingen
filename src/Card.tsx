@@ -5,8 +5,12 @@ interface CardProps {
   swipe: number;
   onSwipe: (swipe: number) => void;
 }
+interface CardState {
+  shine: { x: number, y: number };
+}
 
-export class Card extends React.Component<CardProps, {}> {
+export class Card extends React.Component<CardProps, CardState> {
+  state = { shine: { x: 0, y: 0 } };
   swipingStart?: number = undefined;
   root: HTMLDivElement | null = null;
   componentDidMount() {
@@ -14,12 +18,17 @@ export class Card extends React.Component<CardProps, {}> {
     document.addEventListener('mousemove', this.handleMouseMove);
     document.addEventListener('touchend', this.handleTouchEnd);
     document.addEventListener('touchmove', this.handleTouchMove);
+    window.addEventListener('deviceorientation', this.handleOrientation);
   }
   componentWillUnmount() {
     document.removeEventListener('mouseup', this.handleMouseUp);
     document.removeEventListener('mousemove', this.handleMouseMove);
     document.removeEventListener('touchend', this.handleTouchEnd);
     document.removeEventListener('touchmove', this.handleTouchMove);
+    window.removeEventListener('deviceorientation', this.handleOrientation);
+  }
+  handleOrientation = (e: DeviceOrientationEvent) => {
+    this.setState({ shine: { x: -(e.gamma || 0), y: -(e.beta || 0) } });
   }
   handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -60,7 +69,12 @@ export class Card extends React.Component<CardProps, {}> {
   render() {
     const style = {
       transform: `rotateZ(${this.props.swipe * 40}deg)`,
-      transformOrigin: '50% 300%'
+      transformOrigin: '50% 300%',
+    };
+    const shineStyle = {
+      left: (-20 + this.state.shine.x) + 'vmin',
+      top: (30 + this.state.shine.y) + 'vmin',
+      display: 'block'
     };
     return (
       <div
@@ -70,7 +84,12 @@ export class Card extends React.Component<CardProps, {}> {
         onTouchStart={this.handleTouchStart}
         style={style}
       >
-        <div className="CardOverlay"/>
+        <div className="CardOverlay Overlay"/>
+        <div className="CardAcceptOverlay Overlay" style={{ opacity: Math.max(0, this.props.swipe) }}/>
+        <div className="CardRejectOverlay Overlay" style={{ opacity: Math.max(0, -this.props.swipe) }}/>
+        <div className="CardShineContainer Overlay">
+          <div className="CardShine" style={shineStyle} />
+        </div>
         <div className="CardTitle">Wolfen</div>
       </div>
     );
