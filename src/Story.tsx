@@ -20,24 +20,24 @@ export interface Option {
   nextState: GameStateTransition;
 }
 
-function randomCard(): GameStateTransition {
+const randomCard = (): GameStateTransition => {
   return (state: GameState) => {
     const cards = Worlds[state.world].cards;
     return { world: state.world, card: cards[Math.floor(Math.random() * cards.length)] };
   };
-}
+};
 
-function randomCardInWorld(worldId: WorldId): GameStateTransition {
-  return (state: GameState) => {
+export const randomCardInWorld = (worldId: WorldId) => {
+  return (): GameState => {
     const cards = Worlds[worldId].cards;
     return { world: worldId, card: cards[Math.floor(Math.random() * cards.length)] };
   };
-}
+};
 
 export const CardId = stringEnum(['Goblin', 'Fallen', 'Eating']);
 export type CardId = keyof typeof CardId;
 
-export const WorldId = stringEnum(['Askim', 'Onsala']);
+export const WorldId = stringEnum(['Askim', 'Onsala', 'Dodsriket']);
 export type WorldId = keyof typeof WorldId;
 
 export const Cards: { [key: string]: Card } = {};
@@ -62,7 +62,7 @@ Cards[CardId.Fallen] = {
   leftOption: {
     name: 'Slåss',
     result: 'Åh nej, du dog! Men du vaknade igen i dödsriket.',
-    nextState: randomCard()
+    nextState: randomCardInWorld(WorldId.Dodsriket)
   },
   rightOption: {
     name: 'Spring',
@@ -82,7 +82,7 @@ Cards[CardId.Eating] = {
   rightOption: {
     name: 'Nej',
     result: 'Du kommer till dödsriket.',
-    nextState: randomCard()
+    nextState: randomCardInWorld(WorldId.Dodsriket)
   }
 };
 
@@ -95,10 +95,15 @@ export const Worlds: { [key: string]: World } = {};
 
 Worlds[WorldId.Askim] = {
   image: require('./Images/Environments/Forestroad.jpg'),
-  cards: [CardId.Fallen, CardId.Goblin, CardId.Eating]
+  cards: [CardId.Goblin, CardId.Eating]
 };
 
 Worlds[WorldId.Onsala] = {
   image: require('./Images/Environments/Gloomcove1.jpg'),
+  cards: [CardId.Fallen, CardId.Goblin, CardId.Eating]
+};
+
+Worlds[WorldId.Dodsriket] = {
+  image: require('./Images/Environments/Ghostcity1.jpg'),
   cards: [CardId.Fallen, CardId.Goblin, CardId.Eating]
 };

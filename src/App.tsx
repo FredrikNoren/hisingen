@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import { Card } from './Card';
-import { GameState, WorldId, CardId, Worlds, Cards, Option } from './Story';
+import { GameState, WorldId, CardId, Worlds, Cards, Option, randomCardInWorld } from './Story';
 
 interface AppState {
   world: WorldId;
@@ -12,10 +12,12 @@ interface AppState {
   state: 'card' | 'next';
 }
 
+const startGameState = randomCardInWorld(WorldId.Askim)();
+
 class App extends React.Component<{}, AppState> {
   state: AppState = {
-    world: 'Askim',
-    card: 'Fallen',
+    world: startGameState.world,
+    card: startGameState.card,
     swipe: 0,
     state: 'card',
     lastSelectedOption: { name: '', result: '', nextState: s => s },
