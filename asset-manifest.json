@@ -1,8 +1,13 @@
 {
-  "main.css": "static/css/main.b9392c1f.css",
-  "main.css.map": "static/css/main.b9392c1f.css.map",
-  "main.js": "static/js/main.9367c71c.js",
-  "main.js.map": "static/js/main.9367c71c.js.map",
-  "static/media/Takreshspawn.jpg": "static/media/Takreshspawn.d4b2a3da.jpg",
+  "main.css": "static/css/main.4166fc6c.css",
+  "main.css.map": "static/css/main.4166fc6c.css.map",
+  "main.js": "static/js/main.5a5ccbe6.js",
+  "main.js.map": "static/js/main.5a5ccbe6.js.map",
+  "static/media/Character3.jpg": "static/media/Character3.b7b7fd67.jpg",
+  "static/media/Characters1.jpg": "static/media/Characters1.eb016aed.jpg",
+  "static/media/Fallen1.jpg": "static/media/Fallen1.b22c5f30.jpg",
+  "static/media/Forestroad.jpg": "static/media/Forestroad.6e02b2a0.jpg",
+  "static/media/Ghostcity1.jpg": "static/media/Ghostcity1.e9832f24.jpg",
+  "static/media/Gloomcove1.jpg": "static/media/Gloomcove1.b6a380c2.jpg",
   "static/media/Wolfen1.2.jpg": "static/media/Wolfen1.2.ba931e8a.jpg"
 }
