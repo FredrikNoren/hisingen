@@ -1,8 +1,8 @@
 
 .Card {
-  width: 70vw;
+  width: 71vw; /* 100 * 2.5/3.5 */
   height: 100vw;
-  max-width: 60vh;
+  max-width: 57vh; /* 80 * 2.5/3.5 */
   max-height: 80vh;
   background: url('./Images/Characters/Wolfen1.2.jpg');
   background-size: cover;
