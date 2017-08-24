@@ -7,9 +7,14 @@
   background: url('./Images/Characters/Wolfen1.2.jpg');
   background-size: cover;
   background-position: center;
-  border-radius: 10px;
   box-shadow: 3px 4px 13px rgba(0, 0, 0, 0.4);
   overflow: hidden;
+  transition: 100ms linear all;
+}
+
+.Card,
+.CardOverlay {
+  border-radius: 10px;
 }
 
 .CardOverlay {
