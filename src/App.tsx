@@ -1,13 +1,14 @@
 import * as React from 'react';
 import './App.css';
 import { Card } from './Card';
-import { WorldId, CardId, WORLDS, Cards, Option } from './Story';
+import { GameState, WorldId, CardId, Worlds, Cards, Option } from './Story';
 
 interface AppState {
   world: WorldId;
   card: CardId;
   swipe: number;
   lastSelectedOption: Option;
+  nextCard: CardId;
   state: 'card' | 'next';
 }
 
@@ -17,21 +18,29 @@ class App extends React.Component<{}, AppState> {
     card: 'Fallen',
     swipe: 0,
     state: 'card',
-    lastSelectedOption: { name: '', result: '', nextState: s => s }
+    lastSelectedOption: { name: '', result: '', nextState: s => s },
+    nextCard: CardId.Fallen
   };
+  gameState(): GameState {
+    return { world: this.state.world, card: this.state.card };
+  }
   chooseOption(option: 'left' | 'right') {
     const card = Cards[this.state.card];
+    let opt;
+    let swipe;
     if (option === 'left') {
-      this.setState({ swipe: -1, state: 'next', lastSelectedOption: card.leftOption });
+      opt = card.leftOption;
+      swipe = -1;
     } else {
-      this.setState({ swipe: 1, state: 'next', lastSelectedOption: card.rightOption });
+      opt = card.rightOption;
+      swipe = 1;
     }
-    // setTimeout(() => {
-    // }, 100);
+    const nextState = opt.nextState(this.gameState());
+    this.setState({ swipe, state: 'next', lastSelectedOption: opt,
+      world: nextState.world, nextCard: nextState.card });
   }
   goNext() {
-    const nextState = this.state.lastSelectedOption.nextState({ world: this.state.world, card: this.state.card });
-    this.setState({...nextState, state: 'card', swipe: 0 });
+    this.setState({ state: 'card', swipe: 0, card: this.state.nextCard });
   }
   handleSwipeRelease = () => {
     if (Math.abs(this.state.swipe) > 0.3) {
@@ -45,7 +54,7 @@ class App extends React.Component<{}, AppState> {
     }
   }
   render() {
-    const world = WORLDS[this.state.world];
+    const world = Worlds[this.state.world];
     const card = Cards[this.state.card];
     return (
       <div
