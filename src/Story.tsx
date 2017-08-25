@@ -1,4 +1,5 @@
 import { stringEnum } from './StringEnum';
+declare var require: (id: string) => string;
 
 export interface GameState {
   world: WorldId;
@@ -31,6 +32,12 @@ export const randomCardInWorld = (worldId: WorldId) => {
   return (): GameState => {
     const cards = Worlds[worldId].cards;
     return { world: worldId, card: cards[Math.floor(Math.random() * cards.length)] };
+  };
+};
+
+const specificCard = (cardId: CardId): GameStateTransition => {
+  return (state: GameState) => {
+    return { world: state.world, card: cardId };
   };
 };
 
@@ -72,7 +79,7 @@ Cards[CardId.Goblin] = {
   leftOption: {
     name: 'Nej',
     result: 'Han blir arg, och förvandlades till ett monster',
-    nextState: s => ({ world: s.world, card: CardId.Fallen })
+    nextState: specificCard(CardId.Fallen)
   },
   rightOption: {
     name: 'Ja',
