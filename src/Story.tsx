@@ -41,6 +41,12 @@ const specificCard = (cardId: CardId): GameStateTransition => {
   };
 };
 
+const specificCardInWorld = (worldId: WorldId, cardId: CardId): GameStateTransition => {
+  return (state: GameState) => {
+    return { world: worldId, card: cardId };
+  };
+};
+
 export const CardId = stringEnum([
   'Goblin',
   'Fallen',
@@ -170,7 +176,7 @@ Cards[CardId.Uggla] = {
   leftOption: {
     name: 'Åk till skolan',
     result: 'Halba español?',
-    nextState: randomCardInWorld(WorldId.Schillerska)
+    nextState: specificCardInWorld(WorldId.Schillerska, CardId.Spanskalararen)
   },
   rightOption: {
     name: 'Åk hem',
