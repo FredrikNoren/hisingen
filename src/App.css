@@ -52,21 +52,6 @@
   color: #dfe2d2;
 }
 
-.Actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 4vmin;
-  align-items: baseline;
-}
-
-.CardLeft {
-  color: #ff7157;
-}
-.CardRight {
-  color: #6fd678;
-}
-
 .Next {
   position: absolute;
   top: 50%;

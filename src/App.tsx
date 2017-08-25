@@ -68,6 +68,8 @@ class App extends React.Component<{}, AppState> {
           <div className="CardTitle">{card.title}</div>
           <Card
             imageSrc={card.image}
+            leftOption={card.leftOption.name}
+            rightOption={card.rightOption.name}
             swipe={this.state.swipe}
             onSwipe={swipe => this.setState({ swipe })}
             onSwipeRelease={this.handleSwipeRelease}
@@ -80,10 +82,6 @@ class App extends React.Component<{}, AppState> {
             >
               Ok!
             </button>
-          </div>
-          <div className="Actions">
-            <div className="CardLeft">◀ {card.leftOption.name}</div>
-            <div className="CardRight">{card.rightOption.name} ▶</div>
           </div>
         </div>
       </div>

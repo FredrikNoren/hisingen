@@ -60,14 +60,14 @@ Cards[CardId.Fallen] = {
   title: 'Du möter en Fallen.',
   image: require('./Images/Characters/Fallen1.jpg'),
   leftOption: {
-    name: 'Slåss',
-    result: 'Åh nej, du dog! Men du vaknade igen i dödsriket.',
-    nextState: randomCardInWorld(WorldId.Dodsriket)
-  },
-  rightOption: {
     name: 'Spring',
     result: 'Phew, du hann undan genom att springa till Sisjön!',
     nextState: randomCard()
+  },
+  rightOption: {
+    name: 'Slåss',
+    result: 'Åh nej, du dog! Men du vaknade igen i dödsriket.',
+    nextState: randomCardInWorld(WorldId.Dodsriket)
   }
 };
 
@@ -75,14 +75,14 @@ Cards[CardId.Eating] = {
   title: 'Du sitter och äter, Elin frågar om hon kan få.',
   image: require('./Images/Characters/Characters1.jpg'),
   leftOption: {
-    name: 'Ja',
-    result: 'Elin blir glad och bjuder på en resa till onsala',
-    nextState: randomCardInWorld(WorldId.Onsala)
-  },
-  rightOption: {
     name: 'Nej',
     result: 'Du kommer till dödsriket.',
     nextState: randomCardInWorld(WorldId.Dodsriket)
+  },
+  rightOption: {
+    name: 'Ja',
+    result: 'Elin blir glad och bjuder på en resa till onsala',
+    nextState: randomCardInWorld(WorldId.Onsala)
   }
 };
 

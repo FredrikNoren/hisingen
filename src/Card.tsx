@@ -3,6 +3,8 @@ import './Card.css';
 
 interface CardProps {
   imageSrc: string;
+  leftOption: string;
+  rightOption: string;
   swipe: number;
   onSwipe: (swipe: number) => void;
   onSwipeRelease: () => void;
@@ -74,7 +76,7 @@ export class Card extends React.Component<CardProps, CardState> {
   }
   render() {
     const style = {
-      transform: `rotateZ(${this.props.swipe * 40}deg)`,
+      transform: `rotateZ(${this.props.swipe * 30}deg)`,
       transformOrigin: '50% 300%',
       backgroundImage: `url(${this.props.imageSrc})`
     };
@@ -94,6 +96,15 @@ export class Card extends React.Component<CardProps, CardState> {
         <div className="CardOverlay Overlay"/>
         <div className="CardAcceptOverlay Overlay" style={{ opacity: Math.max(0, this.props.swipe) }}/>
         <div className="CardRejectOverlay Overlay" style={{ opacity: Math.max(0, -this.props.swipe) }}/>
+        <div
+          className="CardAcceptText"
+          style={{
+            opacity: Math.min(Math.abs(this.props.swipe) * 10, 0.95),
+            textAlign: this.props.swipe < 0 ? 'left' : 'right'
+          }}
+        >
+          {this.props.swipe < 0 ? this.props.leftOption : this.props.rightOption}
+        </div>
         <div className="CardShineContainer Overlay">
           <div className="CardShine" style={shineStyle} />
         </div>

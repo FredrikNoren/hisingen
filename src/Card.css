@@ -26,6 +26,13 @@
 .CardRejectOverlay {
   background: rgba(225, 59, 17, 0.73);
 }
+.CardAcceptText {
+  margin: 2vh;
+  color: rgba(10, 7, 7, 0.61);
+  font-weight: bold;
+  font-family: 'Alegreya', serif;
+  font-size: 6vh;
+}
 
 .CardShineContainer {
   overflow: hidden;
