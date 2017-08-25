@@ -325,9 +325,9 @@ Cards[CardId.KillPig] = {
     nextState: randomCardInWorld(WorldId.Lost)
   },
   rightOption: {
-    name: 'Gå därifrån',
+    name: 'Starta om spelet',
     result: '+0 xp',
-    nextState: randomCardInWorld(WorldId.Lost)
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Start)
   }
 };
 

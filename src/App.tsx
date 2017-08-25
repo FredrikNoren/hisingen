@@ -15,7 +15,7 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
   state: AppState = {
     world: WorldId.Askim,
-    card: CardId.Goblin,
+    card: CardId.Start,
     swipe: 0,
     state: 'card',
     lastSelectedOption: { name: '', result: '', nextState: s => s },
