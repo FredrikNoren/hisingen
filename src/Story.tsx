@@ -243,20 +243,22 @@ Cards[CardId.Spanskalararen] = {
     result: 'Grattis! Du tog studenten!',
     nextState: specificCard(CardId.Student)
   }
+
 };
 Cards[CardId.Student] = {
   title: 'Grattis till studenten!',
-  image: require('./Images/Characters/Magnus.png'),
+  image: require('./Images/Characters/Magnus.jpg'),
   leftOption: {
-    name: 'Hoppa av klassen',
+    name: 'Åk hem',
     result: 'Jahopp',
     nextState: randomCardInWorld(WorldId.Askim)
   },
   rightOption: {
-    name: 'Gör läxorna',
+    name: 'Jahaja',
     result: 'Grattis! Du tog studenten!',
-    nextState: specificCard(CardId.Student)
+    nextState: randomCardInWorld(WorldId.Askim)
   }
+  
 };
 Cards[CardId.Palaggstroll] = {
   title: 'Den här killen säljer pålägg. Vilket är bäst?',
