@@ -34,10 +34,35 @@ export const randomCardInWorld = (worldId: WorldId) => {
   };
 };
 
-export const CardId = stringEnum(['Goblin', 'Fallen', 'Eating']);
+export const CardId = stringEnum([
+  'Goblin',
+  'Fallen',
+  'Eating',
+  'Buss',
+  'FredrikOster',
+  'GubbeMedTrad',
+  'Uggla',
+  'Roman',
+  'Raksalladsdistributor',
+  'Pepsi',
+  'Spanskalararen',
+  'Palaggstroll',
+  'KillPig'
+]);
 export type CardId = keyof typeof CardId;
 
-export const WorldId = stringEnum(['Askim', 'Onsala', 'Dodsriket']);
+export const WorldId = stringEnum([
+  'Askim',
+  'Onsala',
+  'Angered',
+  'Sisjon',
+  'Dodsriket',
+  'Spanskaklassen',
+  'Keldyn',
+  'Norrland',
+  'Skovde',
+  'Lost'
+]);
 export type WorldId = keyof typeof WorldId;
 
 export const Cards: { [key: string]: Card } = {};
@@ -86,6 +111,156 @@ Cards[CardId.Eating] = {
   }
 };
 
+Cards[CardId.Buss] = {
+  title: 'Du åker buss. Busschauffören ropar ut hållplatsen du ska gå av. Vill du gå av?',
+  image: require('./Images/Characters/Forgotten1.jpg'),
+  leftOption: {
+    name: 'Ja',
+    result: 'Du gick inte av. Du hamnar i Angered.',
+    nextState: randomCardInWorld(WorldId.Angered)
+  },
+  rightOption: {
+    name: 'Nej',
+    result: 'Du gick inte av. Du hamnar i Angered.',
+    nextState: randomCardInWorld(WorldId.Angered)
+  }
+};
+
+Cards[CardId.FredrikOster] = {
+  title: 'Du möter Fredrik Oster, han erbjuder ett kontrakt.',
+  image: require('./Images/Characters/Ogre2.jpg'),
+  leftOption: {
+    name: 'Ta kontraktet',
+    result: 'Pieces',
+    nextState: randomCardInWorld(WorldId.Skovde)
+  },
+  rightOption: {
+    name: 'Hoppa',
+    result: 'Inget hander',
+    nextState: randomCard()
+  }
+};
+
+Cards[CardId.GubbeMedTrad] = {
+  title: 'Här finns ju inget! En gubbe med ett träd ger dig lift hem.',
+  image: require('./Images/Characters/Iantucauru1.jpg'),
+  leftOption: {
+    name: 'Åk hem',
+    result: 'Du åkte hem',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Åk hem',
+    result: 'Du åkte hem',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
+};
+
+Cards[CardId.Uggla] = {
+  title: 'Du stöter på en klok uggla som berättar hur du ska ta dig tillbaka.',
+  image: require('./Images/Characters/Owlkin1.jpg'),
+  leftOption: {
+    name: 'Åk hem',
+    result: 'Du åkte hem',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Åk hem',
+    result: 'Du åkte hem',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
+};
+
+Cards[CardId.Roman] = {
+  title: 'Efter en promenad runt så bestämmer du dig för att ta på dig din rommerska uniform o traska hem igen.',
+  image: require('./Images/Characters/Human_char1b.jpg'),
+  leftOption: {
+    name: 'Gå hem',
+    result: 'Du gick hem',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Gå hem',
+    result: 'Du gick hem',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
+};
+
+Cards[CardId.Raksalladsdistributor] = {
+  title: 'En räksalladdistributor uppenbarar sig. Han säljer räksallad.',
+  image: require('./Images/Characters/Sentry_char1.jpg'),
+  leftOption: {
+    name: 'Köp',
+    result: 'Mums!',
+    nextState: randomCardInWorld(WorldId.Keldyn)
+  },
+  rightOption: {
+    name: 'Hoppa',
+    result: 'Ojojoj, nu är du körd!',
+    nextState: randomCardInWorld(WorldId.Dodsriket)
+  }
+};
+
+Cards[CardId.Pepsi] = {
+  title: 'Du möter Pepsi. Majuuu?',
+  image: require('./Images/Characters/pepsi.jpg'),
+  leftOption: {
+    name: 'Mjöööölk',
+    result: 'Rätt val',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Jag vill gå ut!',
+    result: 'Rätt val',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
+};
+
+Cards[CardId.Spanskalararen] = {
+  title: 'Spanskaläraren ger dig läxor.',
+  image: require('./Images/Characters/Krugel1.jpg'),
+  leftOption: {
+    name: 'Hoppa av klassen',
+    result: 'Jahopp',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Gör läxorna',
+    result: 'Jahopp',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
+};
+
+Cards[CardId.Palaggstroll] = {
+  title: 'Den här killen säljer pålägg. Vilket är bäst?',
+  image: require('./Images/Characters/Troll2.jpg'),
+  leftOption: {
+    name: 'Ost',
+    result: 'Zergrush! SPRING',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Vitbetor',
+    result: 'Eldorado tackar dig',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
+};
+
+Cards[CardId.KillPig] = {
+  title: 'Du möter en gris.',
+  image: require('./Images/Characters/Yppotryll2.jpg'),
+  leftOption: {
+    name: 'Döda den',
+    result: '+1 xp',
+    nextState: randomCardInWorld(WorldId.Lost)
+  },
+  rightOption: {
+    name: 'Gå därifrån',
+    result: '+0 xp',
+    nextState: randomCardInWorld(WorldId.Lost)
+  }
+};
+
 export interface World {
   image: string;
   cards: CardId[];
@@ -95,15 +270,50 @@ export const Worlds: { [key: string]: World } = {};
 
 Worlds[WorldId.Askim] = {
   image: require('./Images/Environments/Forestroad.jpg'),
-  cards: [CardId.Goblin, CardId.Eating]
+  cards: [CardId.Goblin, CardId.Eating, CardId.Buss, CardId.FredrikOster]
 };
 
 Worlds[WorldId.Onsala] = {
   image: require('./Images/Environments/Gloomcove1.jpg'),
-  cards: [CardId.Fallen, CardId.Goblin, CardId.Eating]
+  cards: [CardId.GubbeMedTrad]
+};
+
+Worlds[WorldId.Angered] = {
+  image: require('./Images/Environments/Skypeak1.jpg'),
+  cards: [CardId.Uggla]
+};
+
+Worlds[WorldId.Sisjon] = {
+  image: require('./Images/Environments/Green_forest1.jpg'),
+  cards: [CardId.Roman]
 };
 
 Worlds[WorldId.Dodsriket] = {
   image: require('./Images/Environments/Ghostcity1.jpg'),
-  cards: [CardId.Fallen, CardId.Goblin, CardId.Eating]
+  cards: [CardId.Pepsi]
+};
+
+Worlds[WorldId.Spanskaklassen] = {
+  image: require('./Images/Environments/Temple1.jpg'),
+  cards: [CardId.Spanskalararen]
+};
+
+Worlds[WorldId.Keldyn] = {
+  image: require('./Images/Environments/Rivervillage1_copy.jpg'),
+  cards: [CardId.Palaggstroll]
+};
+
+Worlds[WorldId.Norrland] = {
+  image: require('./Images/Environments/Icegrip_glacier1.jpg'),
+  cards: []
+};
+
+Worlds[WorldId.Skovde] = {
+  image: require('./Images/Environments/Highlands2.jpg'),
+  cards: [CardId.GubbeMedTrad]
+};
+
+Worlds[WorldId.Lost] = {
+  image: require('./Images/Environments/Landscape2.jpg'),
+  cards: [CardId.KillPig]
 };
