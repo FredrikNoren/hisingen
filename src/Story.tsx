@@ -172,7 +172,7 @@ Cards[CardId.FredrikOster] = {
   image: require('./Images/Characters/Ogre2.jpg'),
   leftOption: {
     name: 'Ta inte kontraktet',
-    result: 'Inget hander',
+    result: 'Inget händer',
     nextState: randomCard()
   },
   rightOption: {
@@ -292,7 +292,7 @@ Cards[CardId.Spanskalararen] = {
   image: require('./Images/Characters/Krugel1.jpg'),
   leftOption: {
     name: 'Hoppa av klassen',
-    result: 'Grattis! Du tog studenten!',
+    result: 'Grattis! Du behövde inte spanskan, du tog studenten ändå!',
     nextState: specificCard(CardId.Student)
   },
   rightOption: {
@@ -306,13 +306,13 @@ Cards[CardId.Student] = {
   title: 'Grattis till studenten!',
   image: require('./Images/Characters/Magnus.jpg'),
   leftOption: {
-    name: 'Åk hem',
-    result: 'Jahopp',
-    nextState: randomCardInWorld(WorldId.Askim)
+    name: 'Starta nästa Blizzard',
+    result: 'Det blev Keldyn',
+    nextState: randomCardInWorld(WorldId.Keldyn)
   },
   rightOption: {
-    name: 'Jahaja',
-    result: 'Grattis! Du tog studenten!',
+    name: 'Åk hem och fira',
+    result: 'Yay!',
     nextState: randomCardInWorld(WorldId.Askim)
   }
 
