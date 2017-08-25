@@ -54,7 +54,8 @@ export const CardId = stringEnum([
   'Pepsi',
   'Spanskalararen',
   'Palaggstroll',
-  'KillPig'
+  'KillPig',
+  'Student'
 ]);
 export type CardId = keyof typeof CardId;
 
@@ -64,7 +65,7 @@ export const WorldId = stringEnum([
   'Angered',
   'Sisjon',
   'Dodsriket',
-  'Spanskaklassen',
+  'Schillerska',
   'Keldyn',
   'Norrland',
   'Skovde',
@@ -83,8 +84,8 @@ Cards[CardId.Goblin] = {
   },
   rightOption: {
     name: 'Ja',
-    result: 'Du fick inga jordgubbar, men förlorade 10kr',
-    nextState: randomCard()
+    result: 'Du fick inga jordgubbar, men förlorade 10kr och hela spelet. Nu för du döda grisar i WoW i all evighet.',
+    nextState: randomCardInWorld(WorldId.Lost)
   }
 };
 
@@ -94,7 +95,7 @@ Cards[CardId.Fallen] = {
   leftOption: {
     name: 'Spring',
     result: 'Phew, du hann undan genom att springa till Sisjön!',
-    nextState: randomCard()
+    nextState:  randomCardInWorld(WorldId.Sisjon)
   },
   rightOption: {
     name: 'Slåss',
@@ -137,13 +138,13 @@ Cards[CardId.FredrikOster] = {
   title: 'Du möter Fredrik Oster, han erbjuder ett kontrakt.',
   image: require('./Images/Characters/Ogre2.jpg'),
   leftOption: {
-    name: 'Hoppa',
+    name: 'Ta inte kontraktet',
     result: 'Inget hander',
     nextState: randomCard()
   },
   rightOption: {
     name: 'Ta kontraktet',
-    result: 'Pieces',
+    result: 'Grattis, du får knäckebröd och vatten!',
     nextState: randomCardInWorld(WorldId.Skovde)
   }
 };
@@ -167,9 +168,9 @@ Cards[CardId.Uggla] = {
   title: 'Du stöter på en klok uggla som berättar hur du ska ta dig tillbaka.',
   image: require('./Images/Characters/Owlkin1.jpg'),
   leftOption: {
-    name: 'Åk hem',
-    result: 'Du åkte hem',
-    nextState: randomCardInWorld(WorldId.Askim)
+    name: 'Åk till skolan',
+    result: 'Halba español?',
+    nextState: randomCardInWorld(WorldId.Schillerska)
   },
   rightOption: {
     name: 'Åk hem',
@@ -179,12 +180,12 @@ Cards[CardId.Uggla] = {
 };
 
 Cards[CardId.Roman] = {
-  title: 'Efter en promenad runt så bestämmer du dig för att ta på dig din rommerska uniform o traska hem igen.',
+  title: 'Grattis! Du hittade en romersk uniform i skogen.',
   image: require('./Images/Characters/Human_char1b.jpg'),
   leftOption: {
-    name: 'Gå hem',
-    result: 'Du gick hem',
-    nextState: randomCardInWorld(WorldId.Askim)
+    name: 'Bada i Sisjön',
+    result: 'Du kan ju inte simma i romersk uniform, du hamnade på sjöbottnen och vaknar upp igen i dödsriket.',
+    nextState: randomCardInWorld(WorldId.Dodsriket)
   },
   rightOption: {
     name: 'Gå hem',
@@ -233,11 +234,24 @@ Cards[CardId.Spanskalararen] = {
   },
   rightOption: {
     name: 'Gör läxorna',
-    result: 'Jahopp',
-    nextState: randomCardInWorld(WorldId.Askim)
+    result: 'Grattis! Du tog studenten!',
+    nextState: specificCard(CardId.Student)
   }
 };
-
+Cards[CardId.Student] = {
+  title: 'Grattis till studenten!',
+  image: require('./Images/Characters/Magnus.png'),
+  leftOption: {
+    name: 'Hoppa av klassen',
+    result: 'Jahopp',
+    nextState: randomCardInWorld(WorldId.Askim)
+  },
+  rightOption: {
+    name: 'Gör läxorna',
+    result: 'Grattis! Du tog studenten!',
+    nextState: specificCard(CardId.Student)
+  }
+};
 Cards[CardId.Palaggstroll] = {
   title: 'Den här killen säljer pålägg. Vilket är bäst?',
   image: require('./Images/Characters/Troll2.jpg'),
@@ -306,10 +320,10 @@ Worlds[WorldId.Dodsriket] = {
   cards: [CardId.Pepsi]
 };
 
-Worlds[WorldId.Spanskaklassen] = {
-  name: 'Spanskaklassen på schillerska',
+Worlds[WorldId.Schillerska] = {
+  name: 'Schillerska',
   image: require('./Images/Environments/Temple1.jpg'),
-  cards: [CardId.Spanskalararen]
+  cards: [CardId.Spanskalararen, CardId.Student]
 };
 
 Worlds[WorldId.Keldyn] = {

@@ -13,7 +13,7 @@ interface AppState {
 }
 
 const startGameState = randomCardInWorld(WorldId.Askim)();
-
+//startGameState.card= CardId.Goblin;
 class App extends React.Component<{}, AppState> {
   state: AppState = {
     world: startGameState.world,
