@@ -61,7 +61,8 @@ export const CardId = stringEnum([
   'Spanskalararen',
   'Palaggstroll',
   'KillPig',
-  'Student'
+  'Student',
+  'Fakir'
 ]);
 export type CardId = keyof typeof CardId;
 
@@ -111,7 +112,7 @@ Cards[CardId.Fallen] = {
 };
 
 Cards[CardId.Eating] = {
-  title: 'Du sitter och äter, Elin frågar om hon kan få något.',
+  title: 'Du sitter och äter texmex, Elin frågar om hon kan få några nachos.',
   image: require('./Images/Characters/Characters1.jpg'),
   leftOption: {
     name: 'Nej',
@@ -175,7 +176,7 @@ Cards[CardId.Uggla] = {
   image: require('./Images/Characters/Owlkin1.jpg'),
   leftOption: {
     name: 'Åk till skolan',
-    result: 'Halba español?',
+    result: 'Habla español?',
     nextState: specificCardInWorld(WorldId.Schillerska, CardId.Spanskalararen)
   },
   rightOption: {
@@ -228,6 +229,21 @@ Cards[CardId.Pepsi] = {
     result: 'Rätt val',
     nextState: randomCardInWorld(WorldId.Askim)
   }
+
+};
+Cards[CardId.Fakir] = {
+  title: 'Himlans konstigt, men du möter en Fakir i dödsriket!',
+  image: require('./Images/Characters/Fakir1.jpg'),
+  leftOption: {
+    name: 'Klappa ormen',
+    result: 'Du förlorade, nu får du döda grisar i Wow för resten av ditt liv',
+    nextState: randomCardInWorld(WorldId.Lost)
+  },
+  rightOption: {
+    name: 'Meditera',
+    result: 'Bra gjort! Fakiren skickar tillbaka dig till levande världen.',
+    nextState: randomCardInWorld(WorldId.Askim)
+  }
 };
 
 Cards[CardId.Spanskalararen] = {
@@ -235,13 +251,13 @@ Cards[CardId.Spanskalararen] = {
   image: require('./Images/Characters/Krugel1.jpg'),
   leftOption: {
     name: 'Hoppa av klassen',
-    result: 'Jahopp',
-    nextState: randomCardInWorld(WorldId.Askim)
+    result: 'Grattis! Du tog studenten!',
+    nextState: specificCard(CardId.Student)
   },
   rightOption: {
     name: 'Gör läxorna',
-    result: 'Grattis! Du tog studenten!',
-    nextState: specificCard(CardId.Student)
+    result: 'Hombre! No me gusta! Detta var dötråkigt, nu hamnade du i dödsriket.',
+    nextState: randomCardInWorld(WorldId.Dodsriket)
   }
 
 };
@@ -258,7 +274,7 @@ Cards[CardId.Student] = {
     result: 'Grattis! Du tog studenten!',
     nextState: randomCardInWorld(WorldId.Askim)
   }
-  
+
 };
 Cards[CardId.Palaggstroll] = {
   title: 'Den här killen säljer pålägg. Vilket är bäst?',
@@ -301,7 +317,7 @@ export const Worlds: { [key: string]: World } = {};
 Worlds[WorldId.Askim] = {
   name: 'Askim',
   image: require('./Images/Environments/Forestroad.jpg'),
-  cards: [CardId.Goblin, CardId.Eating, CardId.Buss, CardId.FredrikOster]
+  cards: [CardId.Goblin, CardId.Eating, CardId.Buss]
 };
 
 Worlds[WorldId.Onsala] = {
@@ -325,7 +341,7 @@ Worlds[WorldId.Sisjon] = {
 Worlds[WorldId.Dodsriket] = {
   name: 'Dödsriket',
   image: require('./Images/Environments/Ghostcity1.jpg'),
-  cards: [CardId.Pepsi]
+  cards: [CardId.Pepsi, CardId.Fakir]
 };
 
 Worlds[WorldId.Schillerska] = {
@@ -337,7 +353,7 @@ Worlds[WorldId.Schillerska] = {
 Worlds[WorldId.Keldyn] = {
   name: 'Keldyn',
   image: require('./Images/Environments/Rivervillage1_copy.jpg'),
-  cards: [CardId.Palaggstroll]
+  cards: [CardId.Palaggstroll, CardId.FredrikOster]
 };
 
 Worlds[WorldId.Norrland] = {
