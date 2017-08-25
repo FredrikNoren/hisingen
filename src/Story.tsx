@@ -62,7 +62,8 @@ export const CardId = stringEnum([
   'Palaggstroll',
   'KillPig',
   'Student',
-  'Fakir'
+  'Fakir',
+  'Start'
 ]);
 export type CardId = keyof typeof CardId;
 
@@ -81,8 +82,24 @@ export const WorldId = stringEnum([
 export type WorldId = keyof typeof WorldId;
 
 export const Cards: { [key: string]: Card } = {};
+Cards[CardId.Start] = {
+  title: 'Det här är en historia om Magnoso den Mäktige och alla hans galna äventyr',
+  image: require('./Images/Characters/Human2.jpg'),
+  leftOption: {
+    name: 'Jag vill ha texmex!',
+    result: 'Mums!',
+    nextState: specificCard(CardId.Eating)
+  },
+  rightOption: {
+    name: 'Jordgubbar är gott!',
+    result: 'Undrar om nån säljer jordgubbar i närheten..?',
+    nextState: specificCard(CardId.Goblin)
+  }
+};
+
+
 Cards[CardId.Goblin] = {
-  title: 'Du möter en goblin, vill du köpa jordgubbar av honom?',
+  title: 'Ja! Du möter en goblin som säljer jordgubbar, vill du köpa av honom?',
   image: require('./Images/Characters/Character3.jpg'),
   leftOption: {
     name: 'Nej',
