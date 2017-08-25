@@ -65,6 +65,7 @@ class App extends React.Component<{}, AppState> {
       >
         <div className="AppBackgroundOverlay Overlay" />
         <div className="Content">
+          <div className="WorldTitle">{world.name}</div>
           <div className="CardTitle">{card.title}</div>
           <Card
             imageSrc={card.image}
@@ -75,7 +76,7 @@ class App extends React.Component<{}, AppState> {
             onSwipeRelease={this.handleSwipeRelease}
           />
           <div className="Next">
-            <div className="NextTitle">{this.state.lastSelectedOption.result}</div>
+            <div className="NextTitle">"{this.state.lastSelectedOption.result}"</div>
             <button
               onClick={e => { e.preventDefault(); this.goNext(); }}
               onTouchStart={e => { e.preventDefault(); this.goNext(); }}

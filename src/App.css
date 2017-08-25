@@ -46,10 +46,17 @@
   pointer-events: inherit;
 }
 
+.WorldTitle {
+  padding: 2vmin;
+  font-size: 3vh;
+  text-align: center;
+}
+
 .CardTitle {
   padding: 2vmin;
   padding-bottom: 4vmin;
   color: #dfe2d2;
+  text-align: center;
 }
 
 .Next {
@@ -57,6 +64,7 @@
   top: 50%;
   transform: translateY(-50%);
   text-align: center;
+  width: 100%;
 }
 .Next > button {
   margin-top: 5vh;
