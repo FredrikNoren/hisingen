@@ -72,7 +72,8 @@ export const CardId = stringEnum([
   'Student',
   'Fakir',
   'Start',
-  'Undead'
+  'Undead',
+  'Win'
 ]);
 export type CardId = keyof typeof CardId;
 
@@ -92,7 +93,7 @@ export type WorldId = keyof typeof WorldId;
 
 export const Cards: { [key: string]: Card } = {};
 Cards[CardId.Start] = {
-  title: 'Det här är en historia om Magnoso den Mäktige och alla hans galna äventyr',
+  title: 'Det här är en historia om Magnoso den Magnifike och alla hans galna äventyr',
   image: require('./Images/Characters/Human2.jpg'),
   leftOption: {
     name: 'Jag vill ha texmex!',
@@ -343,6 +344,21 @@ Cards[CardId.KillPig] = {
   rightOption: {
     name: 'Starta om spelet',
     result: '+0 xp',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Start)
+  }
+};
+
+Cards[CardId.Win] = {
+  title: 'GRATTIS! Du har tagit dig igenom alla spännande äventyr som hittils finns om Magnoso den Magnifike!',
+  image: require('./Images/Characters/Confederacy_group1.jpg'),
+  leftOption: {
+    name: 'Starta om spelet',
+    result: 'Spelet startas om',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Start)
+  },
+  rightOption: {
+    name: 'Starta om spelet',
+    result: 'Spelet startas om',
     nextState: specificCardInWorld(WorldId.Askim, CardId.Start)
   }
 };
