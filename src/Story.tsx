@@ -205,9 +205,9 @@ Cards[CardId.Uggla] = {
     nextState: specificCardInWorld(WorldId.Schillerska, CardId.Spanskalararen)
   },
   rightOption: {
-    name: 'Åk hem',
+    name: 'Åk till Keldynkontoret',
     result: 'Du åkte hem',
-    nextState: randomCardInWorld(WorldId.Askim)
+    nextState: randomCardInWorld(WorldId.Keldyn)
   }
 };
 
