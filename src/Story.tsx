@@ -23,14 +23,22 @@ export interface Option {
 
 const randomCard = (): GameStateTransition => {
   return (state: GameState) => {
-    const cards = Worlds[state.world].cards;
+    const worldCards = Worlds[state.world].cards;
+    let cards = worldCards.filter(id => id !== state.card);
+    if (cards.length === 0) {
+      cards = worldCards;
+    }
     return { world: state.world, card: cards[Math.floor(Math.random() * cards.length)] };
   };
 };
 
 export const randomCardInWorld = (worldId: WorldId) => {
-  return (): GameState => {
-    const cards = Worlds[worldId].cards;
+  return (state: GameState): GameState => {
+    const worldCards = Worlds[worldId].cards;
+    let cards = worldCards.filter(id => id !== state.card);
+    if (cards.length === 0) {
+      cards = worldCards;
+    }
     return { world: worldId, card: cards[Math.floor(Math.random() * cards.length)] };
   };
 };
