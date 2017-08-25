@@ -97,7 +97,7 @@ Cards[CardId.Fallen] = {
 };
 
 Cards[CardId.Eating] = {
-  title: 'Du sitter och äter, Elin frågar om hon kan få.',
+  title: 'Du sitter och äter, Elin frågar om hon kan få något.',
   image: require('./Images/Characters/Characters1.jpg'),
   leftOption: {
     name: 'Nej',
