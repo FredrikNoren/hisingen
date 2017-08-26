@@ -4,6 +4,7 @@ declare var require: (id: string) => string;
 export interface GameState {
   world: WorldId;
   card: CardId;
+  visisted: { [id: string]: boolean };
 }
 
 export interface Card {
@@ -22,36 +23,35 @@ export interface Option {
 }
 
 const randomCard = (): GameStateTransition => {
-  return (state: GameState) => {
-    const worldCards = Worlds[state.world].cards;
-    let cards = worldCards.filter(id => id !== state.card);
-    if (cards.length === 0) {
-      cards = worldCards;
-    }
-    return { world: state.world, card: cards[Math.floor(Math.random() * cards.length)] };
+  return (state) => {
+    return randomCardInWorld(state.world)(state);
   };
 };
 
-export const randomCardInWorld = (worldId: WorldId) => {
+export const randomCardInWorld = (worldId: WorldId): GameStateTransition => {
   return (state: GameState): GameState => {
     const worldCards = Worlds[worldId].cards;
-    let cards = worldCards.filter(id => id !== state.card);
+    let cards = worldCards.filter(id => !state.visisted[id]);
     if (cards.length === 0) {
       cards = worldCards;
     }
-    return { world: worldId, card: cards[Math.floor(Math.random() * cards.length)] };
+    return specificCardInWorld(worldId, cards[Math.floor(Math.random() * cards.length)])(state);
   };
 };
 
 const specificCard = (cardId: CardId): GameStateTransition => {
   return (state: GameState) => {
-    return { world: state.world, card: cardId };
+    return specificCardInWorld(state.world, cardId)(state);
   };
 };
 
 const specificCardInWorld = (worldId: WorldId, cardId: CardId): GameStateTransition => {
   return (state: GameState) => {
-    return { world: worldId, card: cardId };
+    if (Object.keys(state.visisted).length === Object.keys(Cards).length - 1) {
+      return { world: WorldId.Askim, card: CardId.Win, visisted: {} };
+    } else {
+      return { world: worldId, card: cardId, visisted: {...state.visisted, [cardId]: true } };
+    }
   };
 };
 
@@ -106,7 +106,6 @@ Cards[CardId.Start] = {
     nextState: specificCard(CardId.Goblin)
   }
 };
-
 
 Cards[CardId.Goblin] = {
   title: 'Ja! Du möter en goblin som säljer jordgubbar, vill du köpa av honom?',
@@ -398,7 +397,7 @@ Worlds[WorldId.Sisjon] = {
 Worlds[WorldId.Dodsriket] = {
   name: 'Dödsriket',
   image: require('./Images/Environments/Ghostcity1.jpg'),
-  cards: [CardId.Pepsi, CardId.Fakir]
+  cards: [CardId.Pepsi, CardId.Fakir, CardId.Undead]
 };
 
 Worlds[WorldId.Schillerska] = {

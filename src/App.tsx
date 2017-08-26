@@ -10,6 +10,7 @@ interface AppState {
   lastSelectedOption: Option;
   nextCard: CardId;
   state: 'card' | 'next';
+  visisted: { [id: string]: boolean };
 }
 
 class App extends React.Component<{}, AppState> {
@@ -19,10 +20,11 @@ class App extends React.Component<{}, AppState> {
     swipe: 0,
     state: 'card',
     lastSelectedOption: { name: '', result: '', nextState: s => s },
-    nextCard: CardId.Fallen
+    nextCard: CardId.Fallen,
+    visisted: {}
   };
   gameState(): GameState {
-    return { world: this.state.world, card: this.state.card };
+    return { world: this.state.world, card: this.state.card, visisted: this.state.visisted };
   }
   chooseOption(option: 'left' | 'right') {
     const card = Cards[this.state.card];
@@ -37,7 +39,7 @@ class App extends React.Component<{}, AppState> {
     }
     const nextState = opt.nextState(this.gameState());
     this.setState({ swipe, state: 'next', lastSelectedOption: opt,
-      world: nextState.world, nextCard: nextState.card });
+      world: nextState.world, nextCard: nextState.card, visisted: nextState.visisted });
   }
   goNext() {
     this.setState({ state: 'card', swipe: 0, card: this.state.nextCard });
