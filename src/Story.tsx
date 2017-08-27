@@ -22,12 +22,12 @@ export interface Option {
   nextState: GameStateTransition;
 }
 
-const randomCard = (): GameStateTransition => {
+/*const randomCard = (): GameStateTransition => {
   return (state) => {
     return randomCardInWorld(state.world)(state);
   };
 };
-
+*/
 export const randomCardInWorld = (worldId: WorldId): GameStateTransition => {
   return (state: GameState): GameState => {
     const worldCards = Worlds[worldId].cards;
@@ -73,7 +73,9 @@ export const CardId = stringEnum([
   'Fakir',
   'Start',
   'Undead',
-  'Win'
+  'Win',
+  'Krabbor',
+  'Odla'
 ]);
 export type CardId = keyof typeof CardId;
 
@@ -128,7 +130,7 @@ Cards[CardId.Fallen] = {
   leftOption: {
     name: 'Spring',
     result: 'Phew, du hann undan genom att springa till Sisjön!',
-    nextState:  randomCardInWorld(WorldId.Sisjon)
+    nextState:  specificCardInWorld(WorldId.Sisjon, CardId.Roman)
   },
   rightOption: {
     name: 'Slåss',
@@ -147,14 +149,14 @@ Cards[CardId.Eating] = {
   },
   rightOption: {
     name: 'Ja',
-    result: 'Elin blir glad och bjuder på en resa till onsala',
-    nextState: randomCardInWorld(WorldId.Onsala)
+    result: 'Elin blir glad och bjuder på en resa till Onsala',
+    nextState: specificCardInWorld(WorldId.Onsala, CardId.GubbeMedTrad)
   }
 };
 
 Cards[CardId.Buss] = {
   title: 'Du åker buss. Busschauffören ropar ut hållplatsen du ska gå av. Vill du gå av?',
-  image: require('./Images/Characters/Forgotten1.jpg'),
+  image: require('./Images/Characters/Troll1.jpg'),
   leftOption: {
     name: 'Nej',
     result: 'Du gick inte av. Du hamnar i Angered.',
@@ -172,30 +174,62 @@ Cards[CardId.FredrikOster] = {
   image: require('./Images/Characters/Ogre2.jpg'),
   leftOption: {
     name: 'Ta inte kontraktet',
-    result: 'Inget händer',
-    nextState: randomCard()
+    result: 'Grattis, du har klarat av spelet!',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Win)
   },
   rightOption: {
     name: 'Ta kontraktet',
-    result: 'Grattis, du får knäckebröd och vatten!',
-    nextState: randomCardInWorld(WorldId.Skovde)
+    result: 'Grattis, du får knäckebröd och vatten och hamnar i dödsriket!',
+    nextState: randomCardInWorld(WorldId.Dodsriket)
   }
 };
 
 Cards[CardId.GubbeMedTrad] = {
-  title: 'Här finns ju inget! En gubbe med ett träd ger dig lift hem.',
+  title: 'Framme i Onsala möter du en gubbe med ett träd. Han undrar om du ska gå och fånga ödlor eller krabbor vid vattnet?',
   image: require('./Images/Characters/Iantucauru1.jpg'),
   leftOption: {
-    name: 'Åk hem',
-    result: 'Du åkte hem',
-    nextState: randomCardInWorld(WorldId.Askim)
+    name: 'Ödlor',
+    result: 'Nu ska vi se om vi hittar några ödlor!',
+    nextState: specificCard(CardId.Odla)
   },
   rightOption: {
-    name: 'Åk hem',
-    result: 'Du åkte hem',
-    nextState: randomCardInWorld(WorldId.Askim)
+    name: 'Krabbor',
+    result: 'Nu ska vi fånga krabbor!',
+    nextState: specificCard(CardId.Krabbor)
   }
 };
+
+Cards[CardId.Odla] = {
+  title: 'Du hittar en muterad jätteödla, vill du fånga denna?',
+  image: require('./Images/Characters/Forgotten1.jpg'),
+  leftOption: {
+    name: 'Ja',
+    result: 'Ajdå, du blev biten i fingret och får åka hem till Askim igen. Skulle det inte vara gott med jordgubbar?',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Goblin)
+  },
+  rightOption: {
+    name: 'Nej',
+    result: 'Då åker vi hem till Askim. kulle det inte vara gott med jordgubbar?',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Goblin)
+  }
+};
+
+Cards[CardId.Krabbor] = {
+  title: 'Här fanns inte många krabbor, gå och köp jordgubbar istället!',
+  image: require('./Images/Environments/Lake1.jpg'),
+  leftOption: {
+    name: 'Ja, jag vill ha jordgubbar!',
+    result: 'Gott!',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Goblin)
+  },
+  rightOption: {
+    name: 'Nej, fånga krabbor!',
+    result: 'Fel val, jordgubbar ska det va! Undra om någon säljer i närheten...?',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Goblin)
+  }
+};
+
+
 
 Cards[CardId.Uggla] = {
   title: 'Du stöter på en klok uggla som berättar hur du ska ta dig tillbaka.',
@@ -208,7 +242,7 @@ Cards[CardId.Uggla] = {
   rightOption: {
     name: 'Starta nästa Blizzard',
     result: 'Du kom till Keldyn',
-    nextState: randomCardInWorld(WorldId.Keldyn)
+    nextState: specificCardInWorld(WorldId.Keldyn, CardId.Palaggstroll)
   }
 };
 
@@ -218,12 +252,12 @@ Cards[CardId.Roman] = {
   leftOption: {
     name: 'Bada i Sisjön',
     result: 'Du kan ju inte simma i romersk uniform, du hamnade på sjöbottnen och vaknar upp igen i dödsriket.',
-    nextState: randomCardInWorld(WorldId.Dodsriket)
+    nextState: specificCardInWorld(WorldId.Dodsriket, CardId.Fakir)
   },
   rightOption: {
     name: 'Gå hem',
-    result: 'Du gick hem',
-    nextState: randomCardInWorld(WorldId.Askim)
+    result: 'Du gick hem men kom på att du ska åka buss till stan',
+    nextState: specificCardInWorld(WorldId.Askim, CardId.Buss)
   }
 };
 
@@ -232,13 +266,13 @@ Cards[CardId.Raksalladsdistributor] = {
   image: require('./Images/Characters/Sentry_char1.jpg'),
   leftOption: {
     name: 'Hoppa',
-    result: 'Ojojoj, nu är du körd!',
-    nextState: randomCardInWorld(WorldId.Dodsriket)
+    result: 'Ojojoj, nu är du körd och hamar i dödsriket, nej jag menar spanskaklassen!',
+    nextState: specificCardInWorld(WorldId.Schillerska, CardId.Spanskalararen)
   },
   rightOption: {
     name: 'Köp',
     result: 'Mums!',
-    nextState: randomCardInWorld(WorldId.Keldyn)
+    nextState: specificCardInWorld(WorldId.Keldyn, CardId.FredrikOster)
   }
 };
 
@@ -282,8 +316,8 @@ Cards[CardId.Undead] = {
   },
   rightOption: {
     name: 'Gå därifrån',
-    result: 'Du blir kvar i dödsriket',
-    nextState: randomCardInWorld(WorldId.Dodsriket)
+    result: 'Åh nej, du hittar inte ut ur dödsriket och förlorar spelet',
+    nextState: randomCardInWorld(WorldId.Lost)
   }
 };
 
@@ -308,12 +342,12 @@ Cards[CardId.Student] = {
   leftOption: {
     name: 'Starta nästa Blizzard',
     result: 'Det blev Keldyn',
-    nextState: randomCardInWorld(WorldId.Keldyn)
+    nextState: specificCardInWorld(WorldId.Keldyn, CardId.Palaggstroll)
   },
   rightOption: {
     name: 'Åk hem och fira',
-    result: 'Yay!',
-    nextState: randomCardInWorld(WorldId.Askim)
+    result: 'Yay! Du firar med att starta spelföretag!',
+    nextState: specificCardInWorld(WorldId.Keldyn, CardId.Palaggstroll)
   }
 
 };
@@ -323,12 +357,12 @@ Cards[CardId.Palaggstroll] = {
   leftOption: {
     name: 'Ost',
     result: 'Zergrush! SPRING',
-    nextState: randomCardInWorld(WorldId.Dodsriket)
+    nextState: specificCardInWorld(WorldId.Keldyn, CardId.Raksalladsdistributor)
   },
   rightOption: {
     name: 'Vitbetor',
     result: 'Eldorado tackar dig',
-    nextState: randomCardInWorld(WorldId.Keldyn)
+    nextState: specificCardInWorld(WorldId.Keldyn, CardId.Raksalladsdistributor)
   }
 };
 
@@ -379,7 +413,7 @@ Worlds[WorldId.Askim] = {
 Worlds[WorldId.Onsala] = {
   name: 'Onsala',
   image: require('./Images/Environments/Gloomcove1.jpg'),
-  cards: [CardId.GubbeMedTrad]
+  cards: [CardId.GubbeMedTrad, CardId.Krabbor, CardId.Odla]
 };
 
 Worlds[WorldId.Angered] = {
