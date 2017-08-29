@@ -2,6 +2,7 @@ import * as React from 'react';
 import './App.css';
 import { Card } from './Card';
 import { GameState, WorldId, CardId, Worlds, Cards, Option } from './Story';
+import * as url from 'url';
 
 interface AppState {
   world: WorldId;
@@ -13,10 +14,12 @@ interface AppState {
   visisted: { [id: string]: boolean };
 }
 
+const parsedUrl = url.parse(window.location.href, true);
+
 class App extends React.Component<{}, AppState> {
   state: AppState = {
-    world: WorldId.Askim,
-    card: CardId.Start,
+    world: parsedUrl.query.world || WorldId.Askim,
+    card: parsedUrl.query.card || CardId.Start,
     swipe: 0,
     state: 'card',
     lastSelectedOption: { name: '', result: '', nextState: s => s },

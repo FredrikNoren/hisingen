@@ -383,7 +383,7 @@ Cards[CardId.KillPig] = {
 
 Cards[CardId.Win] = {
   title: 'GRATTIS! Du har tagit dig igenom alla spännande äventyr som hittils finns om Magnoso den Magnifike!',
-  image: require('./Images/Characters/magnus(2).jpg'),
+  image: require('./Images/Characters/magnus2.jpg'),
   leftOption: {
     name: 'Starta om spelet',
     result: 'Spelet startas om',
