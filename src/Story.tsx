@@ -174,7 +174,7 @@ Cards[CardId.FredrikOster] = {
   image: require('./Images/Characters/Ogre2.jpg'),
   leftOption: {
     name: 'Ta inte kontraktet',
-    result: 'Grattis, du har klarat av spelet!',
+    result: 'Du tog inte kontraktet',
     nextState: specificCardInWorld(WorldId.Askim, CardId.Win)
   },
   rightOption: {
