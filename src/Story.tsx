@@ -125,7 +125,7 @@ Cards[CardId.Goblin] = {
 };
 
 Cards[CardId.Fallen] = {
-  title: 'Du möter en Fallen.',
+  title: 'Han blev till en Fallen.',
   image: require('./Images/Characters/Fallen1.jpg'),
   leftOption: {
     name: 'Spring',
@@ -383,7 +383,7 @@ Cards[CardId.KillPig] = {
 
 Cards[CardId.Win] = {
   title: 'GRATTIS! Du har tagit dig igenom alla spännande äventyr som hittils finns om Magnoso den Magnifike!',
-  image: require('./Images/Characters/Confederacy_group1.jpg'),
+  image: require('./Images/Characters/magnus(2).jpg'),
   leftOption: {
     name: 'Starta om spelet',
     result: 'Spelet startas om',
